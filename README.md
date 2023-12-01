@@ -31,10 +31,9 @@ I have tested the prompts performance over several possible conversations. The g
 As for the router model I tested it on many wordy examples, to make sure it out-performed a hard-coded program that simply searches for 'enroll' or 'register' keywords. This model is now able to understand nuance, and only deploys the registration form when the user is ready to fill it. 
 
 **Prompt Performance:**
----
-![conversation with Jennifer](chat_snapshot.jpg)
----
-Note: User input in green
+
+
+
 
 ### What edge cases do you think are not handled currently that you would add?
 
