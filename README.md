@@ -33,8 +33,6 @@ As for the router model I tested it on many wordy examples, to make sure it out-
 **Prompt Performance:**
 
 
-
-
 ### What edge cases do you think are not handled currently that you would add?
 
 It would be useful to add user input validation, handling of irrelevant inputs, better exit strategy, and adding other languages.
