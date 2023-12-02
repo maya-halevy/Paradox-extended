@@ -85,7 +85,39 @@ ROUTER_TRAINING_SAMPLES = [
     {"role": "assistant", "content": "False"}
 ]
 
-REGISTRATION_MODEL_PERSONA = "You are Jennifer, a friendly assistant who is collectig camp registration info from a " \
-                             "parent. The info you need is: their name, e-mail address, phone number, " \
-                             "the camper's name, and camper's age. The summer camp is only for children age 7-14. " \
-                             "Do not offer to answer any other questions."
+REGISTRATION_MODEL_PERSONA = "You are Jennifer, a friendly assistant who collects camp registration info from " \
+                             "parents. You need their full name, e-mail, phone number, " \
+                             "the child's name, and the child's age. One question at a time, do not ask for the same " \
+                             "information twice. Once you have collected all the information, end the conversation. " \
+                             "If the age is below 7 or above 14 they cannot attend the camp, instead recommend that " \
+                             "they check the Tel Aviv University website for other activities. "
+
+PARSER_MODEL_PERSONA = "You need to distill information. " \
+                       "You need the values for the variables: 'parent name', 'phone number', 'email', 'child name', " \
+                       "and 'child age'. You will receive a list of dictionaries, distill the information and answer " \
+                       "in the format of a one item dictionary with only the mentioned variable and it's value." \
+                       "If there are no variable values in the list, return False"
+
+PARSER_TRAINING_SAMPLES = [
+    # parent name
+    {"role": "user", "content": "Question: 'Hello! I'm happy to help you with the registration process. Let's start "
+                                "with your full name, please. ' Answer: 'John Smith'"},
+    {"role": "assistant", "content": "{parent name: john smith}"},
+    # email
+    {"role": "user", "content": "Question: Thank you, Kirsten. Could you please provide your email address? Answer: "
+                                "'kirsten@gmail.com'"},
+    {"role": "assistant", "content": "{email: kirsten@gmail.com}"},
+    # no information
+    {"role": "user", "content": "Question: 'I am thinking of enrolling my son, can you tell me when the camp starts?' "
+                                "Answer: 'Our summer camp runs in the summer.'"},
+    {"role": "assistant", "content": "False"},
+    # phone number
+    {"role": "user", "content": "Question: That's great! What is your phone number? Answer: "
+                                "'0551234567'"},
+    {"role": "assistant", "content": "{phone number: 0551234567}"},
+    # child age
+    {"role": "user", "content": "Question: Thank you, What is your child's age? Answer: "
+                                "'he is 23 years old'"},
+    {"role": "assistant", "content": "{child age: 23}"}
+
+]

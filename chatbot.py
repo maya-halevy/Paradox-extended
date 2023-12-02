@@ -35,7 +35,7 @@ def call_router_chatbot(input_message):
 
 def call_registration_chatbot(input_message, conversation_history):
     """
-    Calls the registration model to get a classification if the user is ready to register or not.
+    Calls the registration model to get necessary info for registration.
     :param: input_message: (str): The message from the user.
     :return: str: Chatbot response
     Exception: If an error occurs during the API call.
@@ -93,6 +93,28 @@ def handle_registration():
     return registration_info
 
 
+def call_parsing_chatbot(input_message):
+    """
+    Calls the parsing model to get a classification if the user is ready to register or not.
+    :param: input_message: (str): The message from the user.
+    :return: str: Chatbot response
+    Exception: If an error occurs during the API call.
+    """
+    try:
+        conversation_history = [{"role": "system", "content": constants.PARSER_MODEL_PERSONA}]  # set the model persona
+        conversation_history.extend(
+            constants.PARSER_TRAINING_SAMPLES + [{"role": "user", "content": input_message}])
+
+        completion = openai.ChatCompletion.create(
+            model='gpt-3.5-turbo',
+            messages=conversation_history
+        )
+        return completion.choices[0].message.content
+    except Exception as e:
+        print(f"An error occurred: {e} call_registration_chatbot")
+        sys.exit(1)
+
+
 def call_inquiry_chatbot(input_message):
     """
     Calls the chatbot model to get a response to the user's input.
@@ -112,6 +134,26 @@ def call_inquiry_chatbot(input_message):
     except Exception as e:
         print(f"An error occurred: {e} call_inquiry_chatbot")
         sys.exit(1)
+
+
+def format_dialog(dialog):
+    """
+    Extracts the content after 'content' and 'role' from each entry in the dialog,
+    and formats it as "Question: '...' Answer: '...'".
+    """
+    # Initialize an empty string to store the formatted output
+    formatted_output = ""
+
+    # Loop through each entry in the dialog
+    for i in range(len(dialog) - 1):
+        # Extract the question from the current entry and the answer from the next entry
+        question = dialog[i]['content']
+        answer = dialog[i + 1]['content']
+
+        # Format the output
+        formatted_output += f"Question: '{question}' Answer: '{answer}'"
+
+    return formatted_output
 
 
 def main():
@@ -147,22 +189,30 @@ def main():
                 # register camper
 
                 conversation_history = []
+                camper_info = []
+                end_chat = False
                 while not camper_registered:
 
-                    question, convo = call_registration_chatbot(user_input, conversation_history)
+                    question, conversation = call_registration_chatbot(user_input, conversation_history)
                     print('\nJennifer:', question, '\n')
+
+                    if end_chat:
+                        break
                     user_input = input().strip()
                     if user_input in ['exit', 'quit']:
                         break
+                    conversation.extend([{'role': 'user', 'content': user_input}])
 
-                    print("CONVO:\n", conversation_history)
                     # send Q and A to parsing bot
-                    # info = call_parsing_chatbot(conversation)
-                    # if parsing bot returns not false save info
-                    # if info != "False":
-                    # append the new key:value pair to info_dict
-                    # break when all info is received
+                    conversation_clean = format_dialog(conversation[-2:])
+                    info = call_parsing_chatbot(conversation_clean)
+                    print(info)
 
+                    if info != "False":
+                        camper_info.append(info)
+                        print(camper_info)
+                    if len(camper_info) == 5:  # Note: oversimplified due to time constraints
+                        end_chat = True # break when all info is received
                 break  # exit program after camper is registered
             else:
                 # inquiry chatbot
