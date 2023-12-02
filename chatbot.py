@@ -33,6 +33,29 @@ def call_router_chatbot(input_message):
         sys.exit(1)
 
 
+def call_registration_chatbot(input_message, conversation_history):
+    """
+    Calls the registration model to get a classification if the user is ready to register or not.
+    :param: input_message: (str): The message from the user.
+    :return: str: Chatbot response
+    Exception: If an error occurs during the API call.
+    """
+    try:
+        conversation_history.extend([{"role": "system", "content": constants.REGISTRATION_MODEL_PERSONA},
+                                     {"role": "user", "content": input_message}])
+
+        completion = openai.ChatCompletion.create(
+            model='gpt-3.5-turbo',
+            messages=conversation_history
+        )
+        reply = completion.choices[0].message.content
+        conversation_history.extend([{"role": "assistant", "content": reply}])
+        return reply, conversation_history
+    except Exception as e:
+        print(f"An error occurred: {e} call_registration_chatbot")
+        sys.exit(1)
+
+
 def handle_registration():
     """
     Handle the process of user registration. Prompts the user to enter necessary details like parent's name,
@@ -105,6 +128,8 @@ def main():
     print("\n*** Welcome to GenAI Summer Camp! *** \n\nTo leave the conversation, type 'exit' at any time."
           "\n\nHi there! I'm Jennifer, how can I help you today?\n")
 
+    camper_registered = False
+
     while True:
 
         user_input = input().strip()
@@ -120,7 +145,24 @@ def main():
             # router chatbot to check if user is ready to register
             if call_router_chatbot(user_input).strip() == 'True':
                 # register camper
-                handle_registration()
+
+                conversation_history = []
+                while not camper_registered:
+
+                    question, convo = call_registration_chatbot(user_input, conversation_history)
+                    print('\nJennifer:', question, '\n')
+                    user_input = input().strip()
+                    if user_input in ['exit', 'quit']:
+                        break
+
+                    print("CONVO:\n", conversation_history)
+                    # send Q and A to parsing bot
+                    # info = call_parsing_chatbot(conversation)
+                    # if parsing bot returns not false save info
+                    # if info != "False":
+                    # append the new key:value pair to info_dict
+                    # break when all info is received
+
                 break  # exit program after camper is registered
             else:
                 # inquiry chatbot
