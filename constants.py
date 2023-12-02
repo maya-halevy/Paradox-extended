@@ -92,11 +92,10 @@ REGISTRATION_MODEL_PERSONA = "You are Jennifer, a friendly assistant who collect
                              "If the age is below 7 or above 14 they cannot attend the camp, instead recommend that " \
                              "they check the Tel Aviv University website for other activities. "
 
-PARSER_MODEL_PERSONA = "You need to distill information. " \
-                       "You need the values for the variables: 'parent name', 'phone number', 'email', 'child name', " \
-                       "and 'child age'. You will receive a list of dictionaries, distill the information and answer " \
-                       "in the format of a one item dictionary with only the mentioned variable and it's value." \
-                       "If there are no variable values in the list, return False"
+PARSER_MODEL_PERSONA = "You need the values for the following variables: 'parent name', 'phone number', 'email', " \
+                       "'child name', 'child age'. You will receive a conversation made up of a question and answer, " \
+                       "distill the information and answer in the format of a one item dictionary with only the " \
+                       "mentioned variable and it's value. If there are no variable values in the list, return False"
 
 PARSER_TRAINING_SAMPLES = [
     # parent name
