@@ -36,6 +36,8 @@ As for the router model, I tested it on many wordy examples, to make sure it out
 ---
 ![conversation with Jennifer](chat_snapshot.jpg)
 ---
+This conversation shows the router model correctly triggering the inquiry model, despite the user mentioning that they want to register. It also highlights the ability of the parser model, isolating and saving the registration info. 
+
 
 ### What edge cases do you think are not handled currently that you would add?
 
