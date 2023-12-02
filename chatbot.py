@@ -159,11 +159,10 @@ def main():
                     # send Q and A to parsing bot
                     conversation_clean = format_dialog(conversation[-2:])
                     info = call_parsing_chatbot(conversation_clean)
-                    print('stored: ', info)
+                    print(info)
 
                     if info != "False":
                         camper_info.append(info)
-                        print(camper_info)
                     if len(camper_info) == 5:
                         end_chat = True  # break when all info is received
                 break  # exit program after camper is registered

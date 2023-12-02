@@ -25,9 +25,9 @@ INQUIRY_TRAINING_SAMPLES = [
                 "swimming pool, outdoor spaces, and state-of-the-art tech labs for our workshops."}
 ]
 
-ROUTER_MODEL_PERSONA = "You are a binary classifier. If someone is asking for any information like dates or details" \
+ROUTER_MODEL_PERSONA = "You are a router. If someone is asking for any information (dates, allergies, price)" \
                        "then you must return False. If they have any questions or hesitations you return False. " \
-                       "The only scenario to return True is if someone only wants to sign up/register " \
+                       "The only scenario to return True is if someone ONLY wants to sign up/register " \
                        "and requests nothing else."
 
 ROUTER_TRAINING_SAMPLES = [
