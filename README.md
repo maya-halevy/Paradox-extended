@@ -48,6 +48,7 @@ It would be useful to add user input validation, handling of irrelevant inputs, 
 
 Chatgpt helped me quicky clean the output from the regristration model before sending it as input to the parser model. 
 
+![chatgpt prompt](promot_gpt.jpg)
 
 
   ג
