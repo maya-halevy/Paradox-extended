@@ -18,7 +18,7 @@ User input flows first through a router model. This model acts as a binary class
 - Execute the program from the command line `python3 chatbot.py`
 
 ## Generation of GenAI Summer Camp 🌞🤖🌟
-Get ready for an extraordinary adventure at the GenAI Summer Camp! Held at the Tel Aviv University from August 18 to 29, 2024, this camp is perfect for youngsters aged 7-14 who are eager to dive into the world of technology and machine learning. At GenAI, we blend traditional outdoor activities like swimming and games with engaging workshops on tech topics, all in a supportive and fun environment. Enjoy top-notch facilities, including a university swimming pool and a cafeteria! Join us for a summer to remember. 
+Get ready for an extraordinary adventure at the GenAI Summer Camp! Held at the Tel Aviv University from August 18 to 29, 2024, this camp is perfect for children aged 7-14 who are eager to dive into the world of technology and machine learning. At GenAI, we blend traditional outdoor activities like swimming and games with engaging workshops on tech topics, all in a supportive and fun environment. We have access to top-notch facilities, including a university swimming pool and a cafeteria! Join us for a summer to remember. 
 
 ## Open Questions
 
