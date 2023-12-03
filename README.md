@@ -28,7 +28,7 @@ I have been able to reduce the token usage of the prompts, but with more time I 
 
 ### How would you test the prompts' performance?
 
-I have tested the prompts performance over several possible conversations. The general inquiry chatbot was originally consistently telling parents that the camp provided transportation services, despite the training samples indicating otherwise. After discussing this with ChatGPT I found that the most likely reason for this is that gpt-3.5 training data contains far more situations of camps providing transportation than not. I stuck with the policy of not providing transportation as it  helps demonstrate that the chatbot is effectively trained with few shot learning. 
+I have tested the prompts performance over several possible conversations. The general inquiry chatbot was originally consistently telling parents that the camp provided transportation services, despite the training samples indicating otherwise. The most likely reason for this is that gpt-3.5 training data contains far more situations of camps providing transportation than not. I stuck with the policy of not providing transportation as it  helps demonstrate that the chatbot is effectively trained with few shot learning. 
 
 As for the router model, I tested it on many wordy examples, to make sure it out-performed a hard-coded program that simply searches for 'enroll' or 'register' keywords. This model is now able to understand nuance, and only deploys the registration form when the user is ready to fill it. 
 
@@ -43,6 +43,10 @@ This conversation (user in green) shows the router model correctly triggering th
 ### What edge cases do you think are not handled currently that you would add?
 
 It would be useful to add user input validation, handling of irrelevant inputs, and adding other languages.
+
+## Use of ChatGPT
+
+Chatgpt helped me quicky clean the output from the regristration model before sending it as input to the parser model. 
 
 
 
