@@ -37,8 +37,7 @@ As for the router model, I tested it on many wordy examples, to make sure it out
 ![conversation with Jennifer](chat_snapshot.jpg)
 ---
 
-This conversation (user in green) shows the router model correctly triggering the inquiry model, despite the user mentioning that they want to register. It also highlights the ability of the parser model, which identifies and stores the parent name in a dictionary.
-
+This conversation (user in green) shows the router model correctly triggering the inquiry model, despite the user mentioning wanting to register. It also highlights the ability of the parser model, which identifies and stores the parent name in a dictionary.
 
 ### What edge cases do you think are not handled currently that you would add?
 
