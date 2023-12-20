@@ -143,13 +143,13 @@ def main():
 
                 conversation_history = []
                 camper_info = []
-                end_chat = False
+                camper_registered = False
 
                 while True:
 
                     question, conversation = call_registration_chatbot(user_input, conversation_history)
                     print('\nJennifer:', question, '\n')
-                    if end_chat:
+                    if camper_registered:
                         break
                     user_input = input().strip()
                     if user_input in ['exit', 'quit']:
@@ -164,7 +164,7 @@ def main():
                     if info != "False":
                         camper_info.append(info)
                     if len(camper_info) == 5:
-                        end_chat = True  # break when all info is received
+                        camper_registered = True  # break when all info is received
                 break  # exit program after camper is registered
             else:
                 # inquiry chatbot
